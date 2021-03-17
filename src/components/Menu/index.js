@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity }  from 'react-native';
+import { StyleSheet, TouchableOpacity }  from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Menu(){
 
@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
     container: {
         position: 'absolute',
         zIndex: 9,
-        width: 70,
-        height: 70,
+        width: 60,
+        height: 60,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
@@ -39,6 +39,5 @@ const styles = StyleSheet.create({
             width: 1,
             height: 3
         }
-
     }
 });

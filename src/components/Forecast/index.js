@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     },
     date:{
         fontSize: 14,
-
     },
     temp:{
         alignItems: 'center'

@@ -1,4 +1,3 @@
-
 export function Condition(condition){
     switch(condition){
         case 'storm':
@@ -16,7 +15,7 @@ export function Condition(condition){
         case 'rain':
             return icon = {
                 name: 'rain-outline',
-                cor: '#1ec9ff',
+                color: '#1ec9ff',
             };
             break
         default:

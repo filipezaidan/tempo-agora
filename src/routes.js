@@ -6,7 +6,7 @@ import Search from './pages/Search';
 
 const Drawer = createDrawerNavigator();
 
-function Routes(){
+export default function Routes(){
     return(
         <Drawer.Navigator>
             <Drawer.Screen
@@ -21,7 +21,7 @@ function Routes(){
             name='Search'
             component={Search}
             options={{
-                title: 'Procurar'
+                title: 'Procurar cidade'
             }}
             />
         </Drawer.Navigator>
@@ -29,4 +29,3 @@ function Routes(){
 }
 
 
-export default Routes;
