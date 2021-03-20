@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, Text, StyleSheet, FlatList } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet, FlatList } from 'react-native';
 import * as Location from 'expo-location';
 
 import Menu from '../../components/Menu';
@@ -7,7 +7,9 @@ import Header from '../../components/Header';
 import Conditions from '../../components/Conditions';
 import Forecast from '../../components/Forecast';
 
+
 import api, { key } from '../../services/api';
+import Loading from '../../components/Loading';
 
 const mylist = [
     {
@@ -103,7 +105,8 @@ export default function Home(){
       let { status } = await Location.requestPermissionsAsync();
       
       if(status !== 'granted'){
-        setErrorMsg('Permisão negada para acessar a localização')
+        setErrorMsg('Permisão negada para acessar a localização');
+        setLoading(false);
         return;
       }
 
@@ -111,22 +114,23 @@ export default function Home(){
 
       const { latitude, longitude } = location.coords;
     
-      const response = await api.get(`/weather?key=${key}&lat=${latitude}&lon=${longitude}`);
+      const response = await api.get(`/weather?key=${key}&lat=${location.coords.latitude}&lon=${location.coords.longitude}`);
 
       setWeather(response.data);
-      console.log(weather);
+      setLoading(false);
     })();
-
-    setLoading(false);
-
   }, []);
 
-
+    if(loading){
+      return(
+        <Loading/>
+      );
+    }
     return(
         <SafeAreaView style={styles.container}>
             <Menu/>
             <Header weather={weather}/>
-            <Conditions/>
+            <Conditions weather={weather}/>
 
             <FlatList
             data={mylist}

@@ -2,7 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
  
-export default function Conditions(){
+export default function Conditions({weather}){
+    const { wind_speedy, sunrise, sunset, humidity} = weather.results;
+
     return(
         <View style={styles.container}>
             <View style={styles.conditions}>
@@ -11,7 +13,7 @@ export default function Conditions(){
                 size={13} 
                 color='#1ed6ff'
                 />
-                <Text>7 km/h</Text>
+                <Text>{wind_speedy}</Text>
             </View>
 
             <View style={styles.conditions}>
@@ -20,7 +22,7 @@ export default function Conditions(){
                 size={13} 
                 color='#1ed6ff'
                 />
-                <Text>5:22 am</Text>
+                <Text>{sunrise}</Text>
             </View>
 
             <View style={styles.conditions}>
@@ -29,7 +31,7 @@ export default function Conditions(){
                 size={13} 
                 color='#1ed6ff'
                 />
-                <Text>6:00 am</Text>
+                <Text>{sunset}</Text>
             </View>
 
             <View style={styles.conditions}>
@@ -38,7 +40,7 @@ export default function Conditions(){
                 size={13} 
                 color='#1ed6ff'
                 />
-                <Text>65</Text>
+                <Text>{humidity}</Text>
             </View>
         </View>
     );
