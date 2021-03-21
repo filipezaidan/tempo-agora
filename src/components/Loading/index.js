@@ -1,16 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
-
-
+import LottieView from 'lottie-react-native';
 
 export default function Loading(){
     return(
         <View style={styles.container}>
-            <Text style={styles.text}>Carregando...</Text>
+            <LottieView
+            source={require('../../../assets/loading.json')}
+            autoPlay 
+            loop
+            />
         </View>
     );
 }
-
 
 const styles = StyleSheet.create({
     container:{
@@ -18,7 +20,4 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent: 'center',
     },
-    text: {
-        
-    }
 });

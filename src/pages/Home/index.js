@@ -7,7 +7,6 @@ import Header from '../../components/Header';
 import Conditions from '../../components/Conditions';
 import Forecast from '../../components/Forecast';
 
-
 import api, { key } from '../../services/api';
 import Loading from '../../components/Loading';
 
@@ -113,12 +112,16 @@ export default function Home(){
       let location = await Location.getCurrentPositionAsync({});
 
       const { latitude, longitude } = location.coords;
-    
-      const response = await api.get(`/weather?key=${key}&lat=${location.coords.latitude}&lon=${location.coords.longitude}`);
+ 
+      const response = await api.get(
+        `/weather?key=${key}&lat=${latitude}&lon=${longitude}`
+      );
 
       setWeather(response.data);
       setLoading(false);
+      
     })();
+
   }, []);
 
     if(loading){
@@ -145,7 +148,6 @@ export default function Home(){
         </SafeAreaView>
     );
 }
-
 
 const styles = StyleSheet.create({
     container:{
