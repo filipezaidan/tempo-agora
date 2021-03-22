@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import { Condition } from '../../utils/condition'; 
+import { Condition } from '../../utils/Condition'; 
 
 export default function Forecast({data}){
     let icon = Condition(data.condition)

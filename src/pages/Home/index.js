@@ -6,9 +6,11 @@ import Menu from '../../components/Menu';
 import Header from '../../components/Header';
 import Conditions from '../../components/Conditions';
 import Forecast from '../../components/Forecast';
+import Loading from '../../components/Loading';
+
+import {ConditionSlug} from '../../utils/ConditionSlug';
 
 import api, { key } from '../../services/api';
-import Loading from '../../components/Loading';
 
 const mylist = [
     {
@@ -98,26 +100,51 @@ export default function Home(){
   const [errorMsg, setErrorMsg] = useState(null);
   const [loading, setLoading] = useState(true);
   const [weather, setWeather] = useState([]);
+  const [icon, setIcon] = useState({name: 'cloud', color: '#fff'});
+  const [background, setBackground] = useState(['#1ed6ff','#97c1ff'])
 
   useEffect( () => {
     (async () => {
+
+      //Permissão de localização
       let { status } = await Location.requestPermissionsAsync();
-      
+
+      //Caso o usuário negue a permissão
       if(status !== 'granted'){
         setErrorMsg('Permisão negada para acessar a localização');
         setLoading(false);
         return;
       }
 
+      //Armazena localizaão
       let location = await Location.getCurrentPositionAsync({});
 
       const { latitude, longitude } = location.coords;
- 
+
+      // Requisição de API
       const response = await api.get(
         `/weather?key=${key}&lat=${latitude}&lon=${longitude}`
       );
 
+      //Armazena no useState os dados obtidos da API
       setWeather(response.data);
+      
+      const { currently, condition_slug  } = response.data.results;
+
+      //Altera o background 
+      if(currently === 'noite'){
+        setBackground(['#0c3741', '#0f2f61'])
+      }
+      
+      let iconSlug = ConditionSlug(condition_slug)
+
+      //Altera o iconSlug
+      if(icon !== iconSlug){
+        setIcon(iconSlug);
+      }
+
+
+      //Desativa o Loading
       setLoading(false);
       
     })();
@@ -131,36 +158,34 @@ export default function Home(){
     }
     return(
         <SafeAreaView style={styles.container}>
-            <Menu/>
-            <Header weather={weather}/>
-            <Conditions weather={weather}/>
+          <Menu/>
+          <Header weather={weather} background={background} icon={icon}/>
+          <Conditions weather={weather}/>
 
-            <FlatList
-            data={mylist}
-            keyExtractor={item => item.date}
-            renderItem={ ({item}) => <Forecast data={item}/> }
-            showsHorizontalScrollIndicator={false}
-            horizontal={true}
-            style={styles.list}
-            contentContainerStyle={{ paddingBottom: '5%'}}
-            />
-
+          <FlatList
+          data={weather.results.forecast}
+          keyExtractor={item => item.date}
+          renderItem={ ({item}) => <Forecast data={item}/> }
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+          style={styles.list}
+          contentContainerStyle={{ paddingBottom: '5%'}}
+          />
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#e8f0ff',
-        paddingTop: '5%',
-
-    },
-    list:{
-        marginTop: 10,
-        marginLeft: 10,
-        marginRight: 10
-    },
+  container:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e8f0ff',
+    paddingTop: '5%',
+  },
+  list:{
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10
+  },
 });

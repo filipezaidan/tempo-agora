@@ -4,19 +4,19 @@ import { LinearGradient} from 'expo-linear-gradient';
 
 import {  Ionicons } from '@expo/vector-icons';
 
-export default function Header({weather}){
+export default function Header({weather, background, icon}){
 
     const { date, city, temp} = weather.results;
 
     return( 
         <LinearGradient
         style={styles.header}
-        colors={['#1ed6ff', '#97c1ff']}>
+        colors={background}>
 
             <Text style={styles.date}>{date}</Text>
             <Text style={styles.city}>{city}</Text>
 
-            <Ionicons name='cloud'color='#fff'size={150}/>
+            <Ionicons name={icon.name}color={icon.color} size={150}/>
 
             <Text style={styles.temp}>{temp}º</Text>
         </LinearGradient>   
