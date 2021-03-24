@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { Condition } from '../../utils/Condition'; 
 
-export default function Forecast({data}){
+export default function Forecast({ data }){
     let icon = Condition(data.condition)
 
     return(

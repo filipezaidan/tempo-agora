@@ -129,6 +129,7 @@ export default function Home(){
       //Armazena no useState os dados obtidos da API
       setWeather(response.data);
       
+      //Desestruturação
       const { currently, condition_slug  } = response.data.results;
 
       //Altera o background 
@@ -142,7 +143,6 @@ export default function Home(){
       if(icon !== iconSlug){
         setIcon(iconSlug);
       }
-
 
       //Desativa o Loading
       setLoading(false);
