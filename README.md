@@ -1,6 +1,6 @@
 # TempoAgora - Mobile
 
-<p align="center"><img src="https://i.ibb.co/DrhGDD8/500-F-294429333-YALz-UJbw-Gjxi-Fod-Xpm0-LB9m-Zwgv-WENic-removebg-preview-1.png"/></p>
+<p align="center"><img src="https://i.ibb.co/RTn0ZJL/500-F-294429333-YALz-UJbw-Gjxi-Fod-Xpm0-LB9m-Zwgv-WENic-removebg-preview-1.png"/></p>
 <h4 align="center">Insiders - React Native 🚀</h4>
 <h4 align="center">@SujeitoProgramador</h4>
 
